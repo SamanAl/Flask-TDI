@@ -1,5 +1,6 @@
 # # Modules
 from flask import Flask, render_template, request, redirect
+import os
 import requests
 import numpy as np
 import pandas as pd
@@ -102,5 +103,9 @@ def error_handler(e):
 	return render_template('error.html',ticker=app.vars['ticker'],year=app.vars['start_year'])
 
 # # If main
+#if __name__ == '__main__':
+  #app.run(port=5000,debug=False)
+
 if __name__ == '__main__':
-  app.run(port=5000,debug=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)

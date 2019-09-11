@@ -64,7 +64,8 @@ def graph():
 	
 	# Make Bokeh plot and insert using components
 	# ------------------- ------------------------|
-	p = figure(plot_width=550, plot_height=550, title=app.vars['ticker'], x_axis_type="datetime")
+	TOOLS=['hover','crosshair','pan','wheel_zoom','box_zoom','reset','tap','save','box_select','poly_select','lasso_select']
+	p = figure(plot_width=550, plot_height=550,tools=TOOLS, title=app.vars['ticker'], x_axis_type="datetime")
 	if 'Open' in app.vars['select']:
 		p.line(df.Date, df.Open, color="green",line_width=2,legend='Opening price')
 	if 'Adj_Open' in app.vars['select']:
@@ -74,18 +75,19 @@ def graph():
 	if 'Adj_Close' in app.vars['select']:
 		p.line(df.Date, df.Adj_Close,color="darkcyan", line_width=2,legend='Adjusted Closing price')
 	p.legend.orientation = "vertical"
+	p.legend.location = "top_left"
 		
 	# axis labels
 	p.xaxis.axis_label = "Time"
 	p.xaxis.axis_label_text_font_style = 'bold'
-	p.xaxis.axis_label_text_font_size = '14pt'
+	p.xaxis.axis_label_text_font_size = '12pt'
 	p.xaxis.major_label_orientation = np.pi/4
 	p.xaxis.major_label_text_font_size = '14pt'
 	p.xaxis.bounds = (df.Date.iloc[-1],df.Date.iloc[0])
 	p.yaxis.axis_label = "Price"
 	p.yaxis.axis_label_text_font_style = 'bold'
-	p.yaxis.axis_label_text_font_size = '14pt'
-	p.yaxis.major_label_text_font_size = '14pt'
+	p.yaxis.axis_label_text_font_size = '12pt'
+	p.yaxis.major_label_text_font_size = '12pt'
 	
 	# render graph template
 	# ------------------- ------------------------|
